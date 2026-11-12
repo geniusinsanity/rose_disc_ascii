@@ -1,8 +1,12 @@
 # Rose Disc - ASCII Animation
 
+<p align="center">
+  <img src="assets/preview.png" alt="Rose Disc ASCII Preview" width="550" />
+</p>
+
 This project is an ASCII art animation in Python based on the reference video of a CD jewel case with a spinning disc and a red rose inside.
 
-The whole animation is drawn using text characters and colors. It calculates the shapes and lighting with math (NumPy) and draws them into a grid of characters, with no images or video files used.
+The whole animation is drawn using text characters and colors. It calculates the shapes and lighting with math (NumPy) and draws them into a grid of characters, with no images or video files used during runtime.
 
 ## Features
 
@@ -85,6 +89,7 @@ The executable will be in `dist\rose_disc.exe`.
 
 ## Project Structure
 
+- `assets/preview.png`: Preview image for the readme.
 - `config.py`: Settings, colors, character ramp, and object dimensions.
 - `procedural.py`: Math formulas for the case, disc, and rose petals.
 - `renderer.py`: Converts the math values into character brightness and ANSI strings.
