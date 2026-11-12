@@ -1,0 +1,44 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    name: Build Standalone 64-bit Windows .exe
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Compile Standalone Executable with PyInstaller
+        run: |
+          pyinstaller --clean --noconfirm rose_disc.spec
+
+      - name: Verify Executable CLI Output
+        run: |
+          .\dist\rose_disc.exe --cli --rows 16 --cols 32 --frames 5
+
+      - name: Upload Windows .exe Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rose_disc-windows-x64
+          path: dist/rose_disc.exe
+          if-no-files-found: error
